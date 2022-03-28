@@ -35,7 +35,7 @@
 
 // ****************************END***************************
 
-// 2 Max Chunks To Make Array Sorted:
+// 2                                     Max Chunks To Make Array Sorted:
 
  public static int maxChunksToSorted(int[] arr) {
         //Chaining technique:  
@@ -53,7 +53,7 @@
     }
 // ****************************END***************************
 
-// 3 Max Chunks To Make Array Sorted 2: 
+// 3                                      Max Chunks To Make Array Sorted 2: Leetcode (HARD)
 // Same concept : Chaining technique in differnt way
 
 public static int maxChunksToSorted2(int[] arr) {
@@ -91,6 +91,62 @@ public static int maxChunksToSorted2(int[] arr) {
     }
 // ****************************END***************************
 
-// 4 Range Addition:
+// 4                                                    Range Addition:
+public static int[] Range(int length, int[][] updates) {
+          int [] res=new int[length];
 
+         for(int i=0;i<updates.length;i++){
+            int start=updates[i][0];
+            int end=updates[i][1];
+            int val=updates[i][2]; 
 
+                res[start]+=val;
+                if(end+1<length){
+                res[end+1]-=val; //To nulify the prefix sum for index;
+         }
+        }
+
+         //Prefix sum:
+        int sum=0;
+        for(int i=0; i<length;i++){
+            sum+=res[i];
+            res[i]=sum;
+        }
+         return res;
+     }
+     // ****************************END***************************
+    
+// 5  Partition Labels:
+
+public static List<Integer> partitionLabels(String s) {
+    List<Integer> list=new ArrayList<>();
+    int n=s.length();
+    HashMap<Character,Integer> hm=new HashMap<>();
+    //To find the last occurence of that element:
+    for(int i=0;i<n;i++){
+      hm.put(s.charAt(i),i);
+    }
+
+    int mx=0;
+    int prev=-1;
+
+    //Same as max chunk af array: Find impact
+    for(int i=0;i<n;i++){
+       int val=hm.get(s.charAt(i));
+       mx=Math.max(mx,val);
+
+       if(mx==i){
+         prev=mx-prev;
+         list.add(prev);
+         prev=mx;
+
+       }
+
+    }
+    return list;
+
+  }
+
+  // ****************************END***************************
+
+// 6  
