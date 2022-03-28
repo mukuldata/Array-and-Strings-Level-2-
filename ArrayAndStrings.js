@@ -35,4 +35,62 @@
 
 // ****************************END***************************
 
-// 2 
+// 2 Max Chunks To Make Array Sorted:
+
+ public static int maxChunksToSorted(int[] arr) {
+        //Chaining technique:  
+         int mx=Integer.MIN_VALUE;
+         int count=0;
+         int n=arr.length;
+         for(int i=0;i<n;i++){
+             mx=Math.max(arr[i],mx);
+             if(mx==i){
+                 count++;
+             }
+        }
+
+        return count;
+    }
+// ****************************END***************************
+
+// 3 Max Chunks To Make Array Sorted 2: 
+// Same concept : Chaining technique in differnt way
+
+public static int maxChunksToSorted2(int[] arr) {
+        int n=arr.length;
+        int [] rmin=new int[n+1];
+        int [] lmax=new int[n];
+
+        //Fill rmin-> minimum so far from right;
+        int mn=Integer.MAX_VALUE;
+        rmin[n]=mn;
+
+        for(int i=n-1;i>=0;i--){
+            mn=Math.min(arr[i],mn);
+            rmin[i]=mn;
+        }
+
+    //Filling lmax array:
+    int mx=arr[0];
+    lmax[0]=mx;
+    for(int i=1;i<n;i++){
+        mx=Math.max(arr[i],mx);
+        lmax[i]=mx;
+    }
+
+
+    //Finding count:
+    int count=0;
+    for(int i=0;i<lmax.length;i++){
+        if(lmax[i]<=rmin[i+1]){
+          count++;
+        }
+    }
+
+    return count;
+    }
+// ****************************END***************************
+
+// 4 Range Addition:
+
+
