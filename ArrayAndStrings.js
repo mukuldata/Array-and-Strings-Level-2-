@@ -149,4 +149,42 @@ public static List<Integer> partitionLabels(String s) {
 
   // ****************************END***************************
 
-// 6  
+// 6  Partition Array Into Disjoint Intervals: O(N) space
+
+public static int partitionDisjoint(int[] arr) {
+    int n=arr.length;
+    int [] lmax=new int[n];
+    int [] rmin=new int[n+1];
+
+    //Filling lmax:
+    int mx=arr[0];
+    lmax[0]=mx;
+
+    for(int i=1;i<n;i++){
+     mx=Math.max(arr[i],mx);
+     lmax[i]=mx;
+    }
+
+    //Filling rmin:
+    int mn=Integer.MAX_VALUE;
+    rmin[n]=mn;
+
+    for(int i=n-1;i>=0;i--){
+      mn=Math.min(mn,arr[i]);
+      rmin[i]=mn;
+    }
+    int ans=0;
+    for(int i=0;i<n;i++){
+      if(lmax[i]<rmin[i+1]){
+        ans=i;
+        break;
+      }
+     
+    }
+    return ans+1;
+  }
+
+
+// ****************************END***************************
+
+
