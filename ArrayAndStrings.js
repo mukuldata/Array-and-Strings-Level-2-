@@ -187,4 +187,67 @@ public static int partitionDisjoint(int[] arr) {
 
 // ****************************END***************************
 
+// 3 Next Greater Element To The Right:     (MEDIUM)**
+
+public static int[] solve(int[] arr){
+   int [] res=new int[arr.length];
+   int n=arr.length;
+// O(2n) --> O(n) complexity:
+  Stack<Integer>st=new Stack<>();
+  // pop,print,push;
+  st.push(arr[n-1]);
+  res[n-1]=-1;
+  for(int i=n-2;i>=0;i--)
+  { 
+    //popping out the smaller elements from between to get next greater on peek:
+    while(st.size()>0 && st.peek()<=arr[i] ){
+      st.pop();
+    }
+
+    if(st.size()==0){
+      res[i]=-1;  //No greater element present on right
+    }
+    else{
+      res[i]=st.peek();
+    }
+
+    st.push(arr[i]);// it can be greatest for someone
+  }
+   return res;
+
+ }
+
+// ****************************END***************************
+
+//4 Stock Span: (EASY): 
+
+public static int[] solve(int[] arr){
+   int [] res=new int[arr.length];
+   int n=arr.length;
+
+   //Finding next greater element to the left:
+    Stack<Integer> st=new Stack<>();
+    st.push(0);
+    res[0]=1;
+
+    for(int i=1;i<n;i++)
+    {
+      //popping the smaller elements index:
+      while(st.size()>0 && arr[st.peek()]<arr[i]){
+        st.pop();
+      }
+      if(st.size()==0){
+        res[i]=i+1;    //means there is no max in left
+        }
+        else{
+          res[i]=i-st.peek();   //peek has max element index   
+        }
+        st.push(i);
+    }
+  return res;
+ }
+
+// ****************************END***************************
+
+
 
